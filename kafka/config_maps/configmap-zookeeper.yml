@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-zookeeper
+data:
+  client_port: "2181"
+  tick_time: "2000"

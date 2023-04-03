@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-kafka
+data:
+  kafka_broker_id: "0"
+  kafka_zookeeper_connect: "zookeeper-service:2181"
+  kafka_listeners: "LISTENER_INTERNAL://:29092,LISTENER_EXTERNAL://${HOSTNAME}:9092"
+  kafka_advertised_listeners: "LISTENER_INTERNAL://:29092,LISTENER_EXTERNAL://${HOSTNAME}:9092"
+  kafka_security_protocol_map: LISTENER_INTERNAL:PLAINTEXT,LISTENER_EXTERNAL:PLAINTEXT
+  kafka_interbroker_listener_name: LISTENER_INTERNAL
+  kafka_offets_topic_replication_factor: "1"
+  kafka_auto_create_topics_enable: "true"
+  kafka_transaction_state_log_min_isr: "1"
+  kafka_transaction_state_log_replication_factor: "1"

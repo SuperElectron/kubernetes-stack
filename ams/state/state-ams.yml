@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ams-deployment 
+  labels:
+    app: ams
+spec:
+  serviceName: ams
+  selector:
+    matchLabels:
+      app: ams
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ams
+    spec:
+      containers: 
+      - name: ams-server
+        image: antmediaserver:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5080
+      volumes:
+      - name: pv-ams
+        persistentVolumeClaim:
+          claimName: pvc-ams
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ams-service
+spec:
+  selector:
+    app: ams
+  ports:
+  - protocol: TCP
+    port: 5080
+    targetPort: 5080
+
+      

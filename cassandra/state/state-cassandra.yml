@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cassandra-state
+  labels:
+    app: cassandra
+spec:
+  serviceName: cassandra
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cassandra
+  template:
+    metadata:
+      labels:
+        app: cassandradb
+    spec:
+      containers:
+      - name: cassandra-server
+        image: cassandra:latest
+        ports:
+        - containerPort: 9042
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: secrets-mongo
+              key: mongo-user
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secrets-mongo
+              key: mongo-pass
+      volumes:
+      - name: pv-cassandra
+        persistentVolumeClaim:
+          claimName: pvc-cassandra
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cassandra-service
+spec:
+  selector:
+    app: cassandra
+  ports:
+  - protocol: TCP
+    port: 9042
+    targetPort: 9042
