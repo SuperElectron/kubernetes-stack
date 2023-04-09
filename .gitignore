@@ -1,1 +1,6 @@
 ant-media-*
+
+# IDE
+.idea
+.vscode
+

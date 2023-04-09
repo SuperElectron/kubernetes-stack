@@ -2,18 +2,20 @@
 
 ## Overview
 
-This repository is to be used to set up a kubernetes cluster for the cloud services that are required for the VMS on edge devices.
+This repository is to be used to set up a kubernetes cluster for the cloud services that are required for the on edge devices.
 
-## Third Party Services
+## Getting Started
 
-### Nginx Ingress
+- first, run the installation to get kubernestes and minicube running on your device (assumes linux install)
 
-### Kafka and Zookeeper
-kubectl apply -f 'https://strimzi.io/install/latest?namespace=default' -n default
+```bash
+make install
+```
 
-### Ant Media Server
+- second, run!
 
-### Mongo
+```bash
+make run
+```
 
-### Cassandra
-
+- finally, check out your resources

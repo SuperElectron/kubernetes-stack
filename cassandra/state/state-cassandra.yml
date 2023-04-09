@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        app: cassandradb
+        app: "cassandra"
     spec:
       containers:
       - name: cassandra-server
